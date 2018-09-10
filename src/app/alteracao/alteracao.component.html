@@ -2,14 +2,14 @@
     <div class="row">
         <div class="col s12 m12 l12 xl12">
             <rem-mensageria *ngIf="mensagem" mensagem="{{mensagem.mensagem}}"></rem-mensageria>
-        </div> 
-
-        <form (ngSubmit)="salvar()" class="col s12 m12 l12 xl12">
+        </div>
+        <rem-loader *ngIf="loader"></rem-loader>
+        <form *ngIf="!loader" (ngSubmit)="salvar()" class="col s12 m12 l12 xl12">
             <div class="input-field col s12 m12 l12 xl12">
                 <input [(ngModel)]="remedio.nome" name="nome" placeholder="Nome remédio?" id="nome" type="text" class="validate">
                 <label [class.active]="remedio._id" for="nome">Nome remédio</label>
             </div>
-    
+
            <div class="input-field col s6 m6 l6 xl6">
                 <input [(ngModel)]="remedio.qtdpdia" name="qtdpdia" placeholder="Quantidade por dia?" id="qtdpdia" type="text" class="validate">
                 <label [class.active]="remedio._id" for="qtdpdia">Quantidade por dia</label>

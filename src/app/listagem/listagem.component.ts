@@ -23,6 +23,8 @@ export class ListagemComponent {
             this.mensagem = 'Nenhum remédio foi cadastrado!';
           }
           this.loader = false;
+          console.log(JSON.stringify(this.remedios));
+
         }
         , erro => {
           this.mensagem = erro;

@@ -10,28 +10,48 @@ import { Observable } from 'rxjs';
 export class RemedioService {
 
   remedies: FirebaseListObservable<RemedioComponent[]>;
-  remedie: RemedioComponent;
 
   constructor(private db: AngularFireDatabase) { }
 
   listar(): FirebaseListObservable<RemedioComponent[]> {
-    return this.db.list('remedies', {
+
+    const tes = this.db.list('remedies/', {
       query: {
         orderByKey: true
       }
     });
+
+    console.log(tes.forEach(res => {
+      console.log(res);
+
+    }));
+
+    return tes;
+  }
+
+  cadastrar(remedio: RemedioComponent) {
+    this.remedies = this.listar();
+
+    return this.remedies.push({
+      nome: remedio.nome,
+      qtdpdia: remedio.qtdpdia,
+      qtdestoque: remedio.qtdestoque,
+      contempquantosdias: remedio.contempquantosdias,
+      observacao: remedio.observacao
+    });
+
+    // const retorno = `Remédio ${remedio.nome} cadastrado com sucesso!`;
+    // return Observable.of(retorno);
+    // return this.conexao.post(url, remedio, cabecalho)
+    //   .map(
+    //     () => ({ mensagem: `Remédio "${remedio.nome}" cadastrado com sucesso!` })
+    //   );
   }
 
   // consultar(idRemedio: String): Observable<RemedioComponent> {
   //   return this.conexao.get<RemedioComponent>(`${url}/${idRemedio}`);
   // }
 
-  // cadastrar(remedio: RemedioComponent): Observable<Object> {
-  //   return this.conexao.post(url, remedio, cabecalho)
-  //     .map(
-  //       () => ({ mensagem: `Remédio "${remedio.nome}" cadastrado com sucesso!` })
-  //     );
-  // }
 
   // alterar(remedio: RemedioComponent): Observable<Object> {
   //   return this.conexao.put(`${url}/${remedio._id}`, remedio, cabecalho)

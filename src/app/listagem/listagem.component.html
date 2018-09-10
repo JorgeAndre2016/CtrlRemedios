@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr [routerLink]="['/cadastro', remedio._id]" *ngFor="let remedio of remedios">
+        <tr [routerLink]="['/cadastro', remedio.$key]" *ngFor="let remedio of remedios">
           <td>{{remedio.nome}}</td>
           <td>{{remedio.qtdpdia}}</td>
           <td>{{remedio.qtdestoque}}</td>
