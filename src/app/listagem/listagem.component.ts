@@ -11,14 +11,27 @@ import { RemedioComponent } from '../remedio/remedio.component';
 export class ListagemComponent {
 
   remedios: RemedioComponent[] = [];
+  mensagem: any;
 
   constructor(private servico: RemedioService) {
     this.servico.listar()
       .subscribe(
-        remediosApi => this.remedios = remediosApi
-        , erro => console.log(erro)
-      );
-      console.log(this.remedios);
+        remediosApi => {
+          this.remedios = remediosApi;
 
+
+          if (this.remedios.length === 0) {
+            console.log("passs");
+            this.mensagem = 'Nenhum remédio foi cadastrado!';
+          }
+        }
+        , erro => {
+          console.log("passs erro");
+          this.mensagem = erro;
+            setTimeout(() => {
+              this.mensagem = '';
+            }, 3000);
+        }
+      );
   }
 }
