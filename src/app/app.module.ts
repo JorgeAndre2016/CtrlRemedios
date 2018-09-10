@@ -8,6 +8,7 @@ import { ListagemComponent } from './listagem/listagem.component';
 import { RemedioComponent } from './remedio/remedio.component';
 import { AlteracaoComponent } from './alteracao/alteracao.component';
 import { MesangeriaComponent } from './mensageria/mensageria.component';
+import { LoaderComponent } from './loader/loader.component';
 
 import { roteamento } from './app.router';
 import { RemedioService } from './servicos/remedio.service';
@@ -23,8 +24,8 @@ import { environment } from '../environments/environment';
     ListagemComponent,
     RemedioComponent,
     AlteracaoComponent,
-    MesangeriaComponent
-  //  PipeTextoReduzido
+    MesangeriaComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,8 @@
     <div class="col s12 m12 l12 xl12">
       <rem-mensageria *ngIf="mensagem" mensagem="{{mensagem}}"></rem-mensageria>
     </div>
-    <table *ngIf="!mensagem" class="striped responsive-table col s12 m12 l12 xl12">
+    <rem-loader *ngIf="loader"></rem-loader>
+    <table *ngIf="!loader && !mensagem" class="striped responsive-table col s12 m12 l12 xl12">
       <thead>
         <tr>
           <th>Name</th>
@@ -22,7 +23,7 @@
       </tbody>
     </table>
     <div class="col s12 m12 l12 xl12">
-      <button routerLink="/cadastro" class="waves-effect waves-light btn">Novo</button>
+      <button *ngIf="!loader" routerLink="/cadastro" class="waves-effect waves-light btn">Novo</button>
     </div>
   </div>
 </main>

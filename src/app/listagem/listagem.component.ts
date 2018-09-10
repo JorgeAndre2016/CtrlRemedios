@@ -12,25 +12,24 @@ export class ListagemComponent {
 
   remedios: RemedioComponent[] = [];
   mensagem: any;
+  loader = true;
 
   constructor(private servico: RemedioService) {
     this.servico.listar()
       .subscribe(
         remediosApi => {
           this.remedios = remediosApi;
-
-
           if (this.remedios.length === 0) {
-            console.log("passs");
             this.mensagem = 'Nenhum remédio foi cadastrado!';
           }
+          this.loader = false;
         }
         , erro => {
-          console.log("passs erro");
           this.mensagem = erro;
             setTimeout(() => {
               this.mensagem = '';
             }, 3000);
+            this.loader = false;
         }
       );
   }
