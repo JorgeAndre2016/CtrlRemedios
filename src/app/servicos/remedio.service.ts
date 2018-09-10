@@ -15,7 +15,7 @@ export class RemedioService {
   constructor(private db: AngularFireDatabase) { }
 
   listar(): FirebaseListObservable<RemedioComponent[]> {
-    return this.db.list('remedis', {
+    return this.db.list('remedies', {
       query: {
         orderByKey: true
       }
