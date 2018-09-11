@@ -37,9 +37,7 @@ export class RemedioService {
   }
 
   alterar(remedio: RemedioComponent) {
-
     const path = `/remedies/${remedio.id}`;
-
     firebase.database().ref(path).update({
       nome: remedio.nome,
       observacao: remedio.observacao,

@@ -26,8 +26,6 @@ export class AlteracaoComponent implements OnInit {
     this.rota.params.subscribe(
       parametros => {
         if (parametros.idRemedio && this.mensagem.length === 0) {
-          console.log(this.mensagem.length);
-
           this.loader = true;
           this.conexao.consultar(parametros.idRemedio)
             .subscribe((remedioApi) => {
@@ -53,8 +51,6 @@ export class AlteracaoComponent implements OnInit {
   }
 
   salvar() {
-    console.log('paas');
-
     this.calculoContemParaQuantosDias(this.remedio);
     if (this.remedio.id) {
       this.conexao.alterar(this.remedio);
@@ -74,7 +70,6 @@ export class AlteracaoComponent implements OnInit {
     this.mensagem = 'Remédio deletado com sucesso!';
     this.remedio = new RemedioComponent();
     this.mensageria(5000);
-    console.log(this.mensagem.length + " tam");
   }
 
   calculoContemParaQuantosDias(remedio: RemedioComponent) {
