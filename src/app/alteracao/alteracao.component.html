@@ -1,32 +1,32 @@
 <main class="container">
     <div class="row">
         <div class="col s12 m12 l12 xl12">
-            <rem-mensageria *ngIf="mensagem" mensagem="{{mensagem.mensagem}}"></rem-mensageria>
+            <rem-mensageria *ngIf="mensagem" mensagem="{{mensagem}}"></rem-mensageria>
         </div>
         <rem-loader *ngIf="loader"></rem-loader>
         <form *ngIf="!loader" (ngSubmit)="salvar()" class="col s12 m12 l12 xl12">
             <div class="input-field col s12 m12 l12 xl12">
                 <input [(ngModel)]="remedio.nome" name="nome" placeholder="Nome remédio?" id="nome" type="text" class="validate">
-                <label [class.active]="remedio._id" for="nome">Nome remédio</label>
+                <label [class.active]="remedio.nome" for="nome">Nome remédio</label>
             </div>
 
            <div class="input-field col s6 m6 l6 xl6">
                 <input [(ngModel)]="remedio.qtdpdia" name="qtdpdia" placeholder="Quantidade por dia?" id="qtdpdia" type="text" class="validate">
-                <label [class.active]="remedio._id" for="qtdpdia">Quantidade por dia</label>
+                <label [class.active]="remedio.nome" for="qtdpdia">Quantidade por dia</label>
             </div>
 
             <div class="input-field col s6 m6 l6 xl6">
                 <input [(ngModel)]="remedio.qtdestoque" name="qtdestoque" placeholder="Quantidade em estoque?" id="qtdestoque" type="text" class="validate">
-                <label [class.active]="remedio._id" for="qtdpestoque">Quantidade em estoque</label>
+                <label [class.active]="remedio.nome" for="qtdpestoque">Quantidade em estoque</label>
             </div>
 
             <div class="input-field col s12 m12 l12 xl12">
                 <textarea [(ngModel)]="remedio.observacao" name="observacao" id="textarea1" class="materialize-textarea"></textarea>
-                <label [class.active]="remedio._id" for="textarea1">Observações</label>
+                <label [class.active]="remedio.nome" for="textarea1">Observações</label>
             </div>
 
             <div class="input-field col s12 m12 l12 xl12">
-                <button *ngIf="remedio._id" (click)="deletar(remedio)" class="waves-effect waves-light btn red lighten-1">Deletar</button>
+                <button *ngIf="deleteVisible" (click)="deletar(remedio)" class="waves-effect waves-light btn red lighten-1">Deletar</button>
                 <button class="right waves-effect waves-light btn">Salvar</button>
                 <button routerLink="/" class="right waves-effect waves-light btn grey">Voltar</button>
             </div>
