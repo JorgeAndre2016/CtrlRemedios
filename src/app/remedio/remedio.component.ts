@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
 })
 
 export class RemedioComponent {
+    @Input() id;
     @Input() nome;
     @Input() qtdpdia;
     @Input() qtdestoque;

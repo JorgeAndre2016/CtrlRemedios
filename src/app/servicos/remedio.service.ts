@@ -20,19 +20,13 @@ export class RemedioService {
         orderByKey: true
       }
     });
-
-    console.log(tes.forEach(res => {
-      console.log(res);
-
-    }));
-
     return tes;
   }
 
   cadastrar(remedio: RemedioComponent) {
     this.remedies = this.listar();
 
-    return this.remedies.push({
+    this.remedies.push({
       nome: remedio.nome,
       qtdpdia: remedio.qtdpdia,
       qtdestoque: remedio.qtdestoque,
@@ -48,9 +42,11 @@ export class RemedioService {
     //   );
   }
 
-  // consultar(idRemedio: String): Observable<RemedioComponent> {
-  //   return this.conexao.get<RemedioComponent>(`${url}/${idRemedio}`);
-  // }
+  consultar(idRemedio: String): FirebaseListObservable<any> {
+    const path = `/remedies/${idRemedio}`;
+    console.log(path);
+    return this.db.list(path);
+  }
 
 
   // alterar(remedio: RemedioComponent): Observable<Object> {
@@ -60,10 +56,8 @@ export class RemedioService {
   //     );
   // }
 
-  // deletar(remedio: RemedioComponent): Observable<Object> {
-  //   return this.conexao.delete(`${url}/${remedio._id}`)
-  //     .map(
-  //       () => ({ mensagem: `Remédio "${remedio.nome}" deletado com sucesso!` })
-  //     );
-  // }
+  deletar(idRemedio: string) {
+    const path = `/remedies/${idRemedio}`;
+    return firebase.database().ref(path).remove();
+  }
 }

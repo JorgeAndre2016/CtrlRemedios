@@ -8,8 +8,4 @@ import { Component, Input } from '@angular/core';
 
 export class MesangeriaComponent {
   @Input() mensagem;
-  constructor() {
-console.log(this.mensagem);
-
-  }
 }
