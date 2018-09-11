@@ -4,7 +4,7 @@
             <rem-mensageria *ngIf="mensagem" mensagem="{{mensagem}}"></rem-mensageria>
         </div>
         <rem-loader *ngIf="loader"></rem-loader>
-        <form *ngIf="!loader" (ngSubmit)="salvar()" class="col s12 m12 l12 xl12">
+        <form *ngIf="!loader" class="col s12 m12 l12 xl12">
             <div class="input-field col s12 m12 l12 xl12">
                 <input [(ngModel)]="remedio.nome" name="nome" placeholder="Nome remédio?" id="nome" type="text" class="validate">
                 <label [class.active]="remedio.nome" for="nome">Nome remédio</label>
@@ -27,7 +27,7 @@
 
             <div class="input-field col s12 m12 l12 xl12">
                 <button *ngIf="deleteVisible" (click)="deletar(remedio)" class="waves-effect waves-light btn red lighten-1">Deletar</button>
-                <button class="right waves-effect waves-light btn">Salvar</button>
+                <button (click)="salvar()" class="right waves-effect waves-light btn">Salvar</button>
                 <button routerLink="/" class="right waves-effect waves-light btn grey">Voltar</button>
             </div>
         </form>

@@ -12,18 +12,22 @@ import { RemedioService } from '../servicos/remedio.service';
 export class AlteracaoComponent implements OnInit {
 
   remedio = new RemedioComponent();
-  mensagem: any;
+  mensagem = '';
   loader = false;
   deleteVisible = false;
 
-  constructor(private rota: ActivatedRoute,
+  constructor(
+    private rota: ActivatedRoute,
     private roteador: Router,
-    private conexao: RemedioService) { }
+    private conexao: RemedioService
+  ) { }
 
   ngOnInit() {
     this.rota.params.subscribe(
       parametros => {
-        if (parametros.idRemedio) {
+        if (parametros.idRemedio && this.mensagem.length === 0) {
+          console.log(this.mensagem.length);
+
           this.loader = true;
           this.conexao.consultar(parametros.idRemedio)
             .subscribe((remedioApi) => {
@@ -35,9 +39,6 @@ export class AlteracaoComponent implements OnInit {
               this.remedio.observacao = remedioApi[2].$value;
               this.remedio.qtdestoque = remedioApi[3].$value;
               this.remedio.qtdpdia = remedioApi[4].$value;
-            }, error => {
-              console.log(error);
-
             });
         }
       }
@@ -52,42 +53,28 @@ export class AlteracaoComponent implements OnInit {
   }
 
   salvar() {
+    console.log('paas');
+
     this.calculoContemParaQuantosDias(this.remedio);
-
-    // if (this.remedio.$key) {
-    //     this.conexao.alterar(this.remedio)
-    //         .subscribe(
-    //             mensagem => {
-    //               this.mensagem = mensagem,
-    //               this.mensageria(5000);
-    //             }
-    //             , erro => console.log(erro)
-    //         );
-    // } else {
-
-    this.conexao.cadastrar(this.remedio);
-    // .subscribe(
-    //   mensagem => {
-        this.mensagem = 'Remédio cadastrado com sucesso!';
-        this.remedio = new RemedioComponent();
-        this.mensageria(5000);
-        this.loader = false;
-    //   }
-    //   , erro => {
-    //     console.log('tes');
-    //     console.log(erro);
-    //     this.loader = false;
-    //   }
-    // );
-    // }
+    if (this.remedio.id) {
+      this.conexao.alterar(this.remedio);
+      this.mensagem = `Remédio alterado com sucesso!`;
+      this.mensageria(5000);
+    } else {
+      this.conexao.cadastrar(this.remedio);
+      this.mensagem = 'Remédio cadastrado com sucesso!';
+      this.remedio = new RemedioComponent();
+      this.mensageria(5000);
+      this.loader = false;
+    }
   }
-
 
   deletar(remedio: RemedioComponent) {
     this.conexao.deletar(remedio.id);
     this.mensagem = 'Remédio deletado com sucesso!';
     this.remedio = new RemedioComponent();
     this.mensageria(5000);
+    console.log(this.mensagem.length + " tam");
   }
 
   calculoContemParaQuantosDias(remedio: RemedioComponent) {

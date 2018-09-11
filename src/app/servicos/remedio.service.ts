@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
-
 import { RemedioComponent } from '../remedio/remedio.component';
-import { Observable } from 'rxjs';
-
 
 @Injectable()
 export class RemedioService {
@@ -25,7 +22,6 @@ export class RemedioService {
 
   cadastrar(remedio: RemedioComponent) {
     this.remedies = this.listar();
-
     this.remedies.push({
       nome: remedio.nome,
       qtdpdia: remedio.qtdpdia,
@@ -33,31 +29,28 @@ export class RemedioService {
       contempquantosdias: remedio.contempquantosdias,
       observacao: remedio.observacao
     });
-
-    // const retorno = `Remédio ${remedio.nome} cadastrado com sucesso!`;
-    // return Observable.of(retorno);
-    // return this.conexao.post(url, remedio, cabecalho)
-    //   .map(
-    //     () => ({ mensagem: `Remédio "${remedio.nome}" cadastrado com sucesso!` })
-    //   );
   }
 
   consultar(idRemedio: String): FirebaseListObservable<any> {
     const path = `/remedies/${idRemedio}`;
-    console.log(path);
     return this.db.list(path);
   }
 
+  alterar(remedio: RemedioComponent) {
 
-  // alterar(remedio: RemedioComponent): Observable<Object> {
-  //   return this.conexao.put(`${url}/${remedio._id}`, remedio, cabecalho)
-  //     .map(
-  //       () => ({ mensagem: `Remédio "${remedio.nome}" alterado com sucesso!` })
-  //     );
-  // }
+    const path = `/remedies/${remedio.id}`;
+
+    firebase.database().ref(path).update({
+      nome: remedio.nome,
+      observacao: remedio.observacao,
+      qtdestoque: remedio.qtdestoque,
+      qtdpdia: remedio.qtdpdia,
+      contempquantosdias: remedio.contempquantosdias
+    });
+  }
 
   deletar(idRemedio: string) {
     const path = `/remedies/${idRemedio}`;
-    return firebase.database().ref(path).remove();
+    firebase.database().ref(path).remove();
   }
 }
