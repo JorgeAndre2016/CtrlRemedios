@@ -1,0 +1,19 @@
+For executing deploy in firebase:
+
+1 - should install firebase-tools
+    npm install -g firebase-tools
+2 - should be done login in google
+    firebase login
+3 - should inicialize the firebase in app
+    firebase init
+        Select the options:
+            Y (follow)
+            Hosting (option of the deploy)
+            dist (folder)
+            no (configure index.html)
+            n (configure 404.html)
+            n (configure index.html)
+4 - should generate version (build)
+    ng build
+5 - should realizing the deploy
+    firebase deploy
