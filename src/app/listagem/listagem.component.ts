@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { RemedioService } from '../servicos/remedio.service';
 import { RemedioComponent } from '../remedio/remedio.component';
+import { AuthService } from '../servicos/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'rem-listagem',
@@ -14,7 +16,18 @@ export class ListagemComponent {
   mensagem: any;
   loader = true;
 
-  constructor(private servico: RemedioService) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private servico: RemedioService) {
+
+    this.authService.authUser()
+      .subscribe((resp) => {
+        if (resp === null) {
+          this.router.navigate(['']);
+        }
+      });
+
     this.servico.listar()
       .subscribe(
         remediosApi => {
@@ -26,10 +39,10 @@ export class ListagemComponent {
         }
         , erro => {
           this.mensagem = erro;
-            setTimeout(() => {
-              this.mensagem = '';
-            }, 3000);
-            this.loader = false;
+          setTimeout(() => {
+            this.mensagem = '';
+          }, 3000);
+          this.loader = false;
         }
       );
   }
