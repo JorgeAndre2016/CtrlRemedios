@@ -3,6 +3,15 @@
         <nav>
             <div class="nav-wrapper blue darken-3">
                 <a href="#" class="brand-logo center">Ctrl Remédios</a>
+                <a href="#" data-activates="menu-mobile" class="button-collapse">
+                        <i class="material-icons">dehaze</i>
+                    </a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a (click)="signOut()" class="waves-effect waves-light btn">Exit</a></li>
+                </ul>
+                <ul class="side-nav" id="menu-mobile">
+                    <li><a (closeOnClick)="true" id="menu-mobile2" (click)="signOut()" class="waves-effect waves-light">Exit</a></li>
+                </ul>
             </div>
         </nav>
     </div>
