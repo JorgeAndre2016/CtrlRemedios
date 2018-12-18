@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RemedioComponent } from '../remedio/remedio.component';
 import { RemedioService } from '../servicos/remedio.service';
+import { AuthService } from '../servicos/auth.service';
 
 @Component({
   selector: 'rem-alteracao',
@@ -19,8 +20,16 @@ export class AlteracaoComponent implements OnInit {
   constructor(
     private rota: ActivatedRoute,
     private roteador: Router,
-    private conexao: RemedioService
-  ) { }
+    private conexao: RemedioService,
+    private authService: AuthService
+  ) {
+    this.authService.authUser()
+    .subscribe((resp) => {
+      if (resp === null) {
+        this.roteador.navigate(['']);
+      }
+    });
+  }
 
   ngOnInit() {
     this.rota.params.subscribe(
