@@ -15,7 +15,11 @@ import { RemedioService } from './servicos/remedio.service';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
 import { environment } from '../environments/environment';
+import { LoginComponent } from './login/login.component';
+import { AuthService } from './servicos/auth.service';
 
 @NgModule({
   declarations: [
@@ -25,16 +29,18 @@ import { environment } from '../environments/environment';
     RemedioComponent,
     AlteracaoComponent,
     MesangeriaComponent,
-    LoaderComponent
+    LoaderComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     roteamento,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
-  providers: [RemedioService],
+  providers: [RemedioService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
