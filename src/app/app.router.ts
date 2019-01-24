@@ -8,7 +8,7 @@ const rotas: Routes = [
     { path: 'list', component: ListagemComponent },
     { path: 'cadastro', component: AlteracaoComponent},
     { path: 'cadastro/:idRemedio', component: AlteracaoComponent},
-    { path: '**', redirectTo: ''}
+    { path: '**', redirectTo: 'list'}
 ];
 
 export const roteamento = RouterModule.forRoot(rotas);
